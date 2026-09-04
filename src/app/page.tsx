@@ -1,103 +1,464 @@
-import Image from "next/image";
+"use client";
+import CardNav from "@/components/Nav";
+import SplitText from "@/components/SplitText";
+import PixelBlast from "../components/hero-section";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { useEffect } from "react";
+import {
+  SiDocker,
+  SiFlutter,
+  SiGooglecloud,
+  SiNestjs,
+  SiNextdotjs,
+  SiNodedotjs,
+  SiPortainer,
+  SiReact,
+  SiTailwindcss,
+  SiTypescript,
+} from "react-icons/si";
+import LogoLoop from "@/components/LogoLoop";
+import PixelCard from "@/components/project-card";
+import GradualBlur from "@/components/GradualBlur";
+import ExperienceCard from "@/components/experience-card";
+import FadeContent from "@/components/FadeContent";
+import EducationCard from "@/components/education-card";
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const items = [
+    {
+      label: "About",
+      bgColor: "#87CEEB",
+      textColor: "#fff",
+      links: [
+        {
+          href: "/",
+          label: "Company",
+          ariaLabel: "About Company",
+        },
+        { href: "/", label: "Careers", ariaLabel: "About Careers" },
+      ],
+    },
+    {
+      label: "Projects",
+      bgColor: "#8AB849",
+      textColor: "#fff",
+      links: [
+        { href: "/", label: "Case Studies", ariaLabel: "Project Case Studies" },
+      ],
+    },
+    {
+      label: "Contact",
+      bgColor: "#FA824C",
+      textColor: "#fff",
+      links: [
+        {
+          href: "mailto:vito99varianlaman@gmail.com",
+          label: "Email",
+          ariaLabel: "Email us",
+        },
+        {
+          href: "https://x.com/wh1te_l0tuszz",
+          label: "Twitter",
+          ariaLabel: "Twitter",
+        },
+        {
+          href: "https://www.linkedin.com/in/vitolaman/",
+          label: "LinkedIn",
+          ariaLabel: "LinkedIn",
+        },
+      ],
+    },
+  ];
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  const techLogos = [
+    { node: <SiReact />, title: "React", href: "https://react.dev" },
+    { node: <SiNextdotjs />, title: "Next.js", href: "https://nextjs.org" },
+    { node: <SiFlutter />, title: "Flutter", href: "https://flutter.dev/" },
+    {
+      node: <SiTypescript />,
+      title: "TypeScript",
+      href: "https://www.typescriptlang.org",
+    },
+    {
+      node: <SiTailwindcss />,
+      title: "Tailwind CSS",
+      href: "https://tailwindcss.com",
+    },
+    { node: <SiNestjs />, title: "Nest Js", href: "https://nestjs.com" },
+    { node: <SiNodedotjs />, title: "Node Js", href: "https://nodejs.org" },
+    { node: <SiDocker />, title: "Docker", href: "https://www.docker.com" },
+    {
+      node: <SiPortainer />,
+      title: "Portainer",
+      href: "https://www.portainer.io",
+    },
+    { node: <SiGooglecloud />, title: "GCP", href: "https://cloud.google.com" },
+  ];
+
+  useEffect(() => {
+    AOS.init({});
+  }, []);
+
+  return (
+    <div className="relative h-screen font-mono bg-[#f7f7f2]">
+      <div className="fixed top-0 py-4 w-full h-24 flex justify-center z-50">
+        <CardNav
+          logoAlt="Vito"
+          items={items}
+          baseColor="#000"
+          menuColor="#000"
+          buttonBgColor="#111"
+          buttonTextColor="#fff"
+          ease="power3.out"
+        />
+      </div>
+      <section className="min-h-screen w-[99vw] flex items-center justify-center bg-[#f7f7f2]">
+        <div className="fixed inset-0 h-full overflow-hidden bg-[#000080]">
+          <PixelBlast
+            variant="square"
+            pixelSize={6}
+            color="#6464FF"
+            patternScale={6}
+            patternDensity={1}
+            pixelSizeJitter={0.5}
+            enableRipples
+            rippleSpeed={0.1}
+            rippleThickness={0.4}
+            rippleIntensityScale={1.5}
+            speed={0.6}
+            edgeFade={0}
+            transparent
+          />
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+        <div className="z-40 flex-col justify-center items-center text-center font-sans">
+          <SplitText
+            text="Vito"
+            className="text-7xl md:text-9xl text-[#F9FBF2] font-bold mb-4"
+            delay={100}
+            duration={0.6}
+            ease="power3.out"
+            splitType="chars"
+            from={{ opacity: 0, y: 40 }}
+            to={{ opacity: 1, y: 0 }}
+            threshold={0.1}
+            rootMargin="-100px"
+            textAlign="center"
+            // onLetterAnimationComplete={handleAnimationComplete}
           />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
+          <br />
+          <SplitText
+            text="Laman"
+            className="text-7xl md:text-9xl text-[#F9FBF2] font-bold mb-4"
+            delay={200}
+            duration={0.6}
+            ease="power3.out"
+            splitType="chars"
+            from={{ opacity: 0, y: 40 }}
+            to={{ opacity: 1, y: 0 }}
+            threshold={0.1}
+            rootMargin="-100px"
+            textAlign="center"
           />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
+          <div
+            className="w-full mx-auto flex justify-center my-8"
+            data-aos="fade-up"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="48"
+              height="48"
+              fill="none"
+            >
+              <path
+                d="M 22.75 48 C 20.903 37.41 10.483 27.457 0 25.25 L 0 22.625 C 10.549 20.105 20.686 10.941 22.75 0 L 25.375 0 C 27.169 10.66 37.542 20.343 48 22.625 L 48 25.25 C 37.735 27.377 27.106 37.364 25.375 48 Z"
+                fill="#fff069"
+              ></path>
+            </svg>
+          </div>
+
+          <SplitText
+            text="I'm a senior Fullstack Developer"
+            className="text-lg md:text-2xl text-[#F9FBF2]"
+            delay={100}
+            duration={0.6}
+            ease="power3.out"
+            splitType="words"
+            from={{ opacity: 0, y: 40 }}
+            to={{ opacity: 1, y: 0 }}
+            threshold={0.1}
+            rootMargin="-100px"
+            textAlign="center"
           />
-          Go to nextjs.org →
-        </a>
-      </footer>
+          <br />
+          <SplitText
+            text="Passionately creating
+            digital experiences"
+            className="text-lg md:text-2xl text-[#F9FBF2]"
+            delay={100}
+            duration={0.6}
+            ease="power3.out"
+            splitType="words"
+            from={{ opacity: 0, y: 40 }}
+            to={{ opacity: 1, y: 0 }}
+            threshold={0.1}
+            rootMargin="-100px"
+            textAlign="center"
+          />
+          <div
+            onClick={() => {
+              window.scrollBy({
+                top: window.innerHeight,
+                behavior: "smooth",
+              });
+            }}
+            className="animate-bounce mt-8 cursor-pointer bg-white rounded-full w-12 h-12 flex justify-center items-center self-center mx-auto"
+          >
+            ↓
+          </div>
+        </div>
+      </section>
+      <div className="z-40 flex gap-16 justify-center items-start w-full font-sans">
+        <div className="backdrop-blur-sm flex-col items-start bg-[#f7f7f2] rounded-t-4xl p-4 md:p-16 w-screen md:w-full">
+          <div className="relative">
+            <div className="absolute top-[60%] w-36 md:w-56 -left-1 h-8 bg-amber-300"></div>
+            <div className="absolute top-[40%] left-[50%] md:left-[22%] rounded-full w-12 h-8 bg-green-300"></div>
+            <SplitText
+              text="About Me"
+              className="text-5xl md:text-7xl mt-16 mb-8 font-mono"
+              delay={100}
+              duration={0.6}
+              ease="power3.out"
+              splitType="chars"
+              from={{ opacity: 0, y: 40 }}
+              to={{ opacity: 1, y: 0 }}
+              threshold={0.1}
+              rootMargin="-100px"
+              textAlign="left"
+            />
+          </div>
+
+          <FadeContent
+            className="w-full"
+            blur={true}
+            duration={800}
+            easing="ease-out"
+            initialOpacity={0}
+          >
+            <p className="text-left">
+              Hi, I’m Vito. I build websites and apps for companies, working on
+              both frontend and backend. While I can do both, I’m more into
+              backend stuff, it’s where the fun happens for me. I also make
+              mobile apps and work as an app developer right now. Lately, I’ve
+              been diving into crypto and Web3, learning how to build cool
+              things in that space. I started coding back in junior high by
+              messing around with the layout of my blogspot site. That got me
+              hooked on web development, and I’ve been building things ever
+              since.
+            </p>
+          </FadeContent>
+
+          <div className="relative">
+            <div className="absolute top-[45%] left-[40%] md:left-[42%] w-8 h-8 bg-blue-300"></div>
+            <div className="absolute top-[45%] left-[50%] md:left-[45%] w-8 h-8 bg-blue-300"></div>
+            <SplitText
+              text="Work Experience"
+              className="text-5xl md:text-7xl mb-8 font-mono mt-24"
+              delay={80}
+              duration={0.6}
+              ease="power3.out"
+              splitType="chars"
+              from={{ opacity: 0, y: 40 }}
+              to={{ opacity: 1, y: 0 }}
+              threshold={0.1}
+              rootMargin="-100px"
+              textAlign="left"
+            />
+          </div>
+
+          <FadeContent
+            blur={true}
+            duration={800}
+            easing="ease-out"
+            initialOpacity={0}
+          >
+            <div className="flex flex-wrap gap-2 justify-between">
+              <ExperienceCard
+                company="U2Play"
+                role="UI Designer"
+                date="July 2021 - October 2021"
+                tag="Freelance"
+              />
+              <ExperienceCard
+                company="IFG LIFE"
+                role="Mobile Developer"
+                date="September 2022 - February 2023"
+                tag="Contract"
+              />
+              <ExperienceCard
+                company="Jesselton Capital"
+                role="Fullstack Developer"
+                date="May 2023 - September 2023"
+                tag="Contract"
+              />
+              <ExperienceCard
+                company="Dataxet:Sonar"
+                role="Backend Developer"
+                date="October 2023 - February 2024"
+                tag="Freelance"
+              />
+              <ExperienceCard
+                company="Seeds Finance"
+                role="Mobile Developer"
+                date="March 2024 - August 2025"
+                tag="Fulltime"
+              />
+              <ExperienceCard
+                company="Mepo Indonesia"
+                role="Fullstack Developer"
+                date="August 2025 - Present"
+                tag="Fulltime"
+              />
+            </div>
+          </FadeContent>
+          <div className="relative">
+            <div className="absolute top-[40%] w-12 md:w-12 -left-3 h-12 rounded-full bg-violet-300"></div>
+            <SplitText
+              text="Education"
+              className="text-5xl md:text-7xl mb-8 font-mono mt-24"
+              delay={80}
+              duration={0.6}
+              ease="power3.out"
+              splitType="chars"
+              from={{ opacity: 0, y: 40 }}
+              to={{ opacity: 1, y: 0 }}
+              threshold={0.1}
+              rootMargin="-100px"
+              textAlign="left"
+            />
+          </div>
+
+          <div className="flex flex-wrap gap-2 justify-between">
+            <EducationCard
+              company="Petra Christian University"
+              role="Computer Science"
+              date="2018 - 2024"
+              tag="University"
+            />
+            <EducationCard
+              company="Petra Vocational Highschool"
+              role="Computer and Networks Engineering"
+              date="2015-2018"
+              tag="Highschool"
+            />
+          </div>
+          <div className="flex flex-col">
+            <SplitText
+              text="Projects"
+              className="text-5xl md:text-7xl mb-8 font-mono mt-24"
+              delay={80}
+              duration={0.6}
+              ease="power3.out"
+              splitType="chars"
+              from={{ opacity: 0, y: 40 }}
+              to={{ opacity: 1, y: 0 }}
+              threshold={0.1}
+              rootMargin="-100px"
+              textAlign="left"
+            />
+            <div className="flex justify-between w-full flex-wrap gap-y-16">
+              <PixelCard
+                shape="diamond"
+                title="Nice Ape"
+                desc="Developed a Web3-powered donation platform that enables users to launch and manage campaigns funded through trading fees. The system creates a sustainable model where every trade contributes to active causes, ensuring continuous support while providing transparency and accountability through blockchain technology."
+                link="https://niceape.app/"
+              />
+              <PixelCard
+                shape="heart"
+                title="In-n-Out"
+                desc="Built a modern company profile website for In-n-Out, a car wash service provider. The site showcases their range of services, highlights multiple locations for easy access, and enhances brand visibility through a clean and professional design."
+                link="https://www.innout.co.id/"
+              />
+              <PixelCard
+                shape="circle"
+                title="IHGMA"
+                desc="Developed a custom e-commerce platform and member portal for the Indonesian Hotel General Managers Association. The solution enables members to access exclusive resources, manage their accounts, and participate in community activities, while also supporting online transactions."
+                link="https://ihgma.org/"
+              />
+              <PixelCard
+                shape="star"
+                title="CGM11"
+                desc="Developed a Web3-powered donation platform that enables users to launch and manage campaigns funded through trading fees. The system creates a sustainable model where every trade contributes to active causes, ensuring continuous support while providing transparency and accountability through blockchain technology."
+                link="https://www.cgm11.com/"
+              />
+            </div>
+          </div>
+
+          <SplitText
+            text="Tech Stack"
+            className="text-5xl md:text-7xl mb-8 font-mono mt-24"
+            delay={80}
+            duration={0.6}
+            ease="power3.out"
+            splitType="chars"
+            from={{ opacity: 0, y: 40 }}
+            to={{ opacity: 1, y: 0 }}
+            threshold={0.1}
+            rootMargin="-100px"
+            textAlign="left"
+          />
+          <div
+            className="mt-16"
+            style={{
+              height: "100px",
+              position: "relative",
+              overflow: "hidden",
+            }}
+          >
+            <LogoLoop
+              logos={techLogos}
+              speed={120}
+              direction="left"
+              logoHeight={48}
+              gap={40}
+              pauseOnHover
+              scaleOnHover
+              fadeOut
+              fadeOutColor="#f7f7f2"
+              ariaLabel="Technology partners"
+            />
+          </div>
+
+          <div className="my-24 rounded-3xl p-16 bg-[#000080] w-full text-white">
+            <SplitText
+              text="Build With Me"
+              className="text-5xl md:text-7xl mb-8 mt-24"
+              delay={80}
+              duration={0.6}
+              ease="power3.out"
+              splitType="chars"
+              from={{ opacity: 0, y: 40 }}
+              to={{ opacity: 1, y: 0 }}
+              threshold={0.1}
+              rootMargin="-100px"
+              textAlign="left"
+            />
+          </div>
+        </div>
+      </div>
+      <section className="relative z-20 bg-[#f7f7f2] overflow-hidden p-8 md:px-16 flex-col"></section>
+      <div className="fixed bottom-0 h-24 w-screen z-50">
+        <GradualBlur
+          target="parent"
+          position="bottom"
+          height="6rem"
+          strength={1}
+          divCount={5}
+          curve="bezier"
+          exponential={true}
+          opacity={1}
+        />
+      </div>
     </div>
   );
 }
