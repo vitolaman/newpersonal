@@ -370,15 +370,15 @@ export default function Home() {
             <div className="flex justify-between w-full flex-wrap gap-y-16">
               <PixelCard
                 shape="diamond"
-                title="Nice Ape"
-                desc="Developed a Web3-powered donation platform that enables users to launch and manage campaigns funded through trading fees. The system creates a sustainable model where every trade contributes to active causes, ensuring continuous support while providing transparency and accountability through blockchain technology."
-                link="https://niceape.app/"
+                title="Picardata"
+                desc="Developed a centralized data analytics platform that enables users to analyze and visualize data from multiple sources. The system provides a comprehensive suite of tools for data management, analysis, and reporting, ensuring data integrity."
+                link="https://picardata.com/"
               />
               <PixelCard
                 shape="heart"
-                title="In-n-Out"
-                desc="Built a modern company profile website for In-n-Out, a car wash service provider. The site showcases their range of services, highlights multiple locations for easy access, and enhances brand visibility through a clean and professional design."
-                link="https://www.innout.co.id/"
+                title="IKANHI"
+                desc="Built a campus alumni networking platform that enables users to connect with each other, share their knowledge and experiences, and stay updated on campus news and events."
+                link="https://ikanhi.org/"
               />
               <PixelCard
                 shape="circle"
