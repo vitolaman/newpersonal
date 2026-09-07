@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useMemo, useState, useEffect } from "react";
 
 type PixelShapeProps = {
@@ -16,7 +18,12 @@ function usePixelShape(
   density: number,
   blinkFraction: number
 ) {
-  return useMemo(() => {
+  const [pixels, setPixels] = useState<{
+    basePixels: { x: number; y: number; color: string }[];
+    blinkablePixels: { x: number; y: number }[];
+  }>({ basePixels: [], blinkablePixels: [] });
+
+  useEffect(() => {
     const cols = Math.floor(size / pixelSize);
     const rows = Math.floor(size / pixelSize);
     const base: { x: number; y: number; color: string }[] = [];
@@ -26,7 +33,10 @@ function usePixelShape(
     canvas.width = size;
     canvas.height = size;
     const ctx = canvas.getContext("2d");
-    if (!ctx) return { basePixels: [], blinkablePixels: [] };
+    if (!ctx) {
+      setPixels({ basePixels: [], blinkablePixels: [] });
+      return;
+    }
 
     ctx.fillStyle = "#000";
     const path2D = new Path2D(shapePath);
@@ -51,8 +61,10 @@ function usePixelShape(
         }
       }
     }
-    return { basePixels: base, blinkablePixels: blinkable };
+    setPixels({ basePixels: base, blinkablePixels: blinkable });
   }, [shapePath, size, pixelSize, density, blinkFraction]);
+
+  return pixels;
 }
 
 const PixelRenderer: React.FC<PixelShapeProps & { shapePath: string }> = ({

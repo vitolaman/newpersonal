@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useMemo, useState, useEffect } from "react";
 
 type PixelStarProps = {
@@ -48,7 +50,14 @@ const PixelStar: React.FC<PixelStarProps> = ({
   }, [size, points]);
 
   // Generate base + blinkable pixels
-  const { basePixels, blinkablePixels } = useMemo(() => {
+  const [pixels, setPixels] = useState<{
+    basePixels: { x: number; y: number; color: string }[];
+    blinkablePixels: { x: number; y: number }[];
+  }>({ basePixels: [], blinkablePixels: [] });
+
+  useEffect(() => {
+    if (typeof document === 'undefined') return;
+
     const cols = Math.floor(size / pixelSize);
     const rows = Math.floor(size / pixelSize);
     const base: { x: number; y: number; color: string }[] = [];
@@ -58,7 +67,10 @@ const PixelStar: React.FC<PixelStarProps> = ({
     canvas.width = size;
     canvas.height = size;
     const ctx = canvas.getContext("2d");
-    if (!ctx) return { basePixels: [], blinkablePixels: [] };
+    if (!ctx) {
+      setPixels({ basePixels: [], blinkablePixels: [] });
+      return;
+    }
 
     ctx.fillStyle = "#000080";
     const path2D = new Path2D(starPath);
@@ -83,8 +95,10 @@ const PixelStar: React.FC<PixelStarProps> = ({
         }
       }
     }
-    return { basePixels: base, blinkablePixels: blinkable };
+    setPixels({ basePixels: base, blinkablePixels: blinkable });
   }, [size, pixelSize, density, blinkFraction, starPath]);
+
+  const { basePixels, blinkablePixels } = pixels;
 
   // Blinking pixels (color random each frame)
   const blinkingRects = useMemo(() => {

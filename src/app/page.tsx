@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import {
   SiDocker,
   SiFlutter,
+  SiGo,
   SiGooglecloud,
   SiNestjs,
   SiNextdotjs,
@@ -87,6 +88,7 @@ export default function Home() {
     },
     { node: <SiNestjs />, title: "Nest Js", href: "https://nestjs.com" },
     { node: <SiNodedotjs />, title: "Node Js", href: "https://nodejs.org" },
+    { node: <SiGo />, title: "Go", href: "https://go.dev" },
     { node: <SiDocker />, title: "Docker", href: "https://www.docker.com" },
     {
       node: <SiPortainer />,
@@ -110,8 +112,7 @@ export default function Home() {
           menuColor="#000"
           buttonBgColor="#111"
           buttonTextColor="#fff"
-          ease="power3.out"
-        />
+          ease="power3.out" logo={""} />
       </div>
       <section className="min-h-screen w-[99vw] flex items-center justify-center bg-[#f7f7f2]">
         <div className="fixed inset-0 h-full overflow-hidden bg-[#000080]">
@@ -144,7 +145,7 @@ export default function Home() {
             threshold={0.1}
             rootMargin="-100px"
             textAlign="center"
-            // onLetterAnimationComplete={handleAnimationComplete}
+          // onLetterAnimationComplete={handleAnimationComplete}
           />
           <br />
           <SplitText
@@ -284,12 +285,6 @@ export default function Home() {
           >
             <div className="flex flex-wrap gap-2 justify-between">
               <ExperienceCard
-                company="U2Play"
-                role="UI Designer"
-                date="July 2021 - October 2021"
-                tag="Freelance"
-              />
-              <ExperienceCard
                 company="IFG LIFE"
                 role="Mobile Developer"
                 date="September 2022 - February 2023"
@@ -316,7 +311,13 @@ export default function Home() {
               <ExperienceCard
                 company="Mepo Indonesia"
                 role="Fullstack Developer"
-                date="August 2025 - Present"
+                date="May 2024 - December 2025"
+                tag="Fulltime"
+              />
+              <ExperienceCard
+                company="Sinergi Teknologi Cerdas"
+                role="Fullstack Developer Lead"
+                date="November 2025 - Present"
                 tag="Fulltime"
               />
             </div>
@@ -428,7 +429,7 @@ export default function Home() {
               ariaLabel="Technology partners"
             />
           </div>
-
+          {/* 
           <div className="my-24 rounded-3xl p-16 bg-[#000080] w-full text-white">
             <SplitText
               text="Build With Me"
@@ -443,7 +444,7 @@ export default function Home() {
               rootMargin="-100px"
               textAlign="left"
             />
-          </div>
+          </div> */}
         </div>
       </div>
       <section className="relative z-20 bg-[#f7f7f2] overflow-hidden p-8 md:px-16 flex-col"></section>
