@@ -389,7 +389,7 @@ export default function Home() {
               <PixelCard
                 shape="star"
                 title="CGM11"
-                desc="Developed a Web3-powered donation platform that enables users to launch and manage campaigns funded through trading fees. The system creates a sustainable model where every trade contributes to active causes, ensuring continuous support while providing transparency and accountability through blockchain technology."
+                desc="Developed a blog and CMS for a computer hardware shop with custom admin dashboard and tools."
                 link="https://www.cgm11.com/"
               />
             </div>
